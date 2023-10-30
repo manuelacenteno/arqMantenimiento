@@ -1,1 +1,4 @@
 # arqMantenimiento
+
+GET /mantenimientos
+
