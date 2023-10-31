@@ -14,20 +14,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Mantenimiento.dtos.ReporteMonopatinesDTO;
 import com.example.demo.Mantenimiento.model.Mantenimiento;
 import com.example.demo.Mantenimiento.repository.MantenimientoRepository;
+import com.example.demo.Mantenimiento.services.MonopatinService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
 @RequestMapping("/mantenimientos")
 public class MantenimientoController {
+
     @Autowired
     private MantenimientoRepository repo;
 
-    
+    @Autowired
+    private MonopatinService monopatinService;
 
     @GetMapping
     public List<Mantenimiento> listarMantenimientos(){
@@ -51,5 +57,10 @@ public class MantenimientoController {
         repo.save(m);
     }
 
+    @GetMapping("/pedirReporteMonopatines")
+    public List<ReporteMonopatinesDTO> pedirReporte() {
+        List<ReporteMonopatinesDTO> reporte = monopatinService.getReporte();
+        return reporte;
+    }
     
 }
