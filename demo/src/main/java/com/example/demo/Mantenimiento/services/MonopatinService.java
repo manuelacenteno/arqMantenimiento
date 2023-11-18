@@ -1,5 +1,6 @@
 package com.example.demo.Mantenimiento.services;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,15 +28,21 @@ public class MonopatinService {
         this.rest = rest;
     }
 
-    public List<ReporteMonopatinesDTO> getReporte() {
-        String url = monopatinURL+"/reporteMonopatines";
-        System.out.println(monopatinURL);
+    public List<ReporteMonopatinesDTO> getReporte(String authorization) {
+        String url = monopatinURL + "/reporteMonopatines";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", authorization);
+
+        HttpEntity<Object> requestEntity = new HttpEntity<>(headers);
+
         ResponseEntity<List<ReporteMonopatinesDTO>> response = rest.exchange(
                 url,
                 HttpMethod.GET,
-                null,
+                requestEntity,
                 new ParameterizedTypeReference<List<ReporteMonopatinesDTO>>() {});
-                return response.getBody();
+
+        return response.getBody();
     }
 
 }
