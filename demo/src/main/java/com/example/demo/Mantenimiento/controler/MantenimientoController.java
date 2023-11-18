@@ -39,8 +39,7 @@ public class MantenimientoController {
     public List<Mantenimiento> listarMantenimientos(){
         return repo.findAll();
     }
-    
-    @SuppressWarnings("unchecked")
+
     @PostMapping
     public void grabarMantenimiento(@RequestBody Mantenimiento mantenimiento) {
         repo.save(mantenimiento);
