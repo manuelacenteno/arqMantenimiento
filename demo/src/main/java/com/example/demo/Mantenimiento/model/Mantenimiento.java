@@ -1,36 +1,30 @@
 package com.example.demo.Mantenimiento.model;
 
-
-
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-import jakarta.persistence.*;
-
-@Entity
+@Document(collection = "mantenimientos")
 public class Mantenimiento {
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer idMantenimiento;
-    @Column
+    private ObjectId idMantenimiento;
     private String tarea;
-    @Column
     private Integer idMonopatin;
-    @Column
     private Date fecha;
 
-    public Mantenimiento(){
+    public Mantenimiento() {
         super();
-    
     }
 
-    public Mantenimiento(String tarea, Integer idMonopatin, Date fecha){
+    public Mantenimiento(String tarea, Integer idMonopatin, Date fecha) {
         this.tarea = tarea;
         this.idMonopatin = idMonopatin;
         this.fecha = fecha;
     }
 
-     public Integer getIdMantenimiento() {
+    public ObjectId getIdMantenimiento() {
         return idMantenimiento;
     }
 
@@ -57,10 +51,5 @@ public class Mantenimiento {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
-   
-
-
-    
-
 }
+

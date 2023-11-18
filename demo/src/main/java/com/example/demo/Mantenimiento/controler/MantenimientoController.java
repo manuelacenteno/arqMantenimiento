@@ -42,20 +42,10 @@ public class MantenimientoController {
     
     @SuppressWarnings("unchecked")
     @PostMapping
-    public void grabarMantenimiento(@RequestBody String mantenimiento) throws JsonMappingException, JsonProcessingException{
-        ObjectMapper prueba = new ObjectMapper();
-        Map<String,String> pruebva2 = prueba.readValue(mantenimiento, Map.class);
-        String tarea = (String)pruebva2.get("tarea");
-        String idMonopatin = (String)pruebva2.get("idMonopatin");
-        Integer id = Integer.parseInt(idMonopatin);
-        LocalDate fecha = LocalDate.now();
-        Date fechaHoy = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        
-    
-        System.out.println(tarea + id+ fechaHoy);
-        Mantenimiento m = new Mantenimiento(tarea,id,fechaHoy);
-        repo.save(m);
+    public void grabarMantenimiento(@RequestBody Mantenimiento mantenimiento) {
+        repo.save(mantenimiento);
     }
+
 
     @GetMapping("/pedirReporteMonopatines")
     public List<ReporteMonopatinesDTO> pedirReporte() {
